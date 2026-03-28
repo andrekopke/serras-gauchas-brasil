@@ -2,7 +2,7 @@
 title: "Gramado e Canela: O Guia Essencial para Planejar sua Viagem em 2026"
 order: 1
 destination: "gramado"
-type: "roteiro"
+type: "O que fazer"
 heroImage: "/guia-turismo-gramado-canela-serra-gaucha.jpg"
 rating: 5
 priceRange: 3
