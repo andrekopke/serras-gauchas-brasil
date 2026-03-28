@@ -12,33 +12,40 @@ export async function getStaticPaths() {
 
 const { guide } = Astro.props;
 const { Content } = await guide.render();
+
+// BUSCA OUTROS POSTS RELACIONADOS (EXCLUINDO O ATUAL)
+const relatedPosts = (await getCollection('guides'))
+    .filter(p => p.slug !== guide.slug)
+    .slice(0, 3);
 ---
 
 <Layout title={guide.data.title}>
-  <article class="max-w-4xl mx-auto px-4 py-12">
-    <img src={guide.data.heroImage} class="w-full h-[400px] object-cover rounded-2xl shadow-lg mb-8" alt={guide.data.title} />
+  <article class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight text-gray-900">{guide.data.title}</h1>
     
-    <div class="flex items-center gap-4 mb-6">
-      <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-bold uppercase">{guide.data.type}</span>
-      <span class="text-gray-500 text-sm">Destino: <span class="capitalize font-semibold">{guide.data.destination}</span></span>
-    </div>
-
-    <h1 class="text-4xl md:text-5xl font-black text-gray-900 mb-8 leading-tight">
-      {guide.data.title}
-    </h1>
-
-    <div class="prose prose-lg prose-blue max-w-none">
+    <div class="prose prose-lg max-w-none mb-12">
       <Content />
     </div>
 
-    {guide.data.affiliateLink && (
-      <div class="mt-12 bg-yellow-50 border-2 border-yellow-200 p-8 rounded-2xl text-center">
-        <h3 class="text-2xl font-bold mb-4">Planeje sua visita!</h3>
-        <p class="mb-6">Garanta seus ingressos e evite filas em Gramado.</p>
-        <a href={guide.data.affiliateLink} target="_blank" class="bg-blue-700 text-white font-bold py-4 px-10 rounded-full hover:bg-blue-800 transition-colors inline-block">
-          Comprar Ingressos Oficiais
-        </a>
-      </div>
-    )}
+    <div class="bg-blue-50 border-2 border-blue-200 p-6 rounded-xl my-10">
+        <h4 class="font-bold text-blue-900 mb-2 italic">🎁 Dica de Desconto:</h4>
+        <p class="text-sm mb-4">Está planejando sua viagem? Use nosso cupom <strong>SERRA10</strong> para garantir desconto em ingressos e hotéis!</p>
+        <div class="flex flex-wrap gap-4">
+            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded font-bold text-xs uppercase">Ver Hotéis com Desconto</a>
+            <a href="#" class="bg-yellow-500 text-blue-900 px-4 py-2 rounded font-bold text-xs uppercase">Ingressos de Parques</a>
+        </div>
+    </div>
+
+    <div class="border-t pt-12">
+        <h3 class="text-2xl font-black mb-8 italic uppercase tracking-tighter">Você também pode gostar</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {relatedPosts.map(post => (
+                <a href={`/guia/${post.slug}`} class="block group">
+                    <img src={post.data.heroImage} class="w-full h-32 object-cover rounded-lg mb-2" />
+                    <h4 class="font-bold text-sm leading-tight group-hover:text-blue-600 transition">{post.data.title}</h4>
+                </a>
+            ))}
+        </div>
+    </div>
   </article>
 </Layout>
