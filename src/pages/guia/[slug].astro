@@ -13,39 +13,47 @@ export async function getStaticPaths() {
 const { guide } = Astro.props;
 const { Content } = await guide.render();
 
-// BUSCA OUTROS POSTS RELACIONADOS (EXCLUINDO O ATUAL)
-const relatedPosts = (await getCollection('guides'))
-    .filter(p => p.slug !== guide.slug)
-    .slice(0, 3);
+// BUSCA OUTROS POSTS DO MESMO DESTINO (Filtrando o atual)
+const allGuides = await getCollection('guides');
+const relatedPosts = allGuides
+  .filter(p => p.slug !== guide.slug && p.data.destination === guide.data.destination)
+  .slice(0, 3);
 ---
 
 <Layout title={guide.data.title}>
-  <article class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight text-gray-900">{guide.data.title}</h1>
+  <article class="max-w-4xl mx-auto px-4 py-8 md:py-12">
+    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">{guide.data.type} em <span class="capitalize">{guide.data.destination}</span></span>
     
-    <div class="prose prose-lg max-w-none mb-12">
+    <h1 class="text-3xl md:text-5xl font-extrabold mb-6 mt-3 leading-tight text-gray-900 drop-shadow-sm font-serif">
+      {guide.data.title}
+    </h1>
+    
+    <img src={guide.data.heroImage} class="w-full h-72 md:h-[450px] object-cover rounded-2xl shadow-xl mb-12" alt={guide.data.title} />
+
+    <div class="prose prose-lg prose-blue max-w-none text-gray-800 leading-relaxed font-sans prose-img:rounded-xl prose-headings:font-serif">
       <Content />
     </div>
 
-    <div class="bg-blue-50 border-2 border-blue-200 p-6 rounded-xl my-10">
-        <h4 class="font-bold text-blue-900 mb-2 italic">🎁 Dica de Desconto:</h4>
-        <p class="text-sm mb-4">Está planejando sua viagem? Use nosso cupom <strong>SERRA10</strong> para garantir desconto em ingressos e hotéis!</p>
-        <div class="flex flex-wrap gap-4">
-            <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded font-bold text-xs uppercase">Ver Hotéis com Desconto</a>
-            <a href="#" class="bg-yellow-500 text-blue-900 px-4 py-2 rounded font-bold text-xs uppercase">Ingressos de Parques</a>
+    {relatedPosts.length > 0 && (
+      <div class="border-t border-gray-200 mt-20 pt-16">
+        <h3 class="text-2xl md:text-3xl font-black mb-10 text-gray-900 uppercase italic tracking-tighter">Leia Também</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {relatedPosts.map(post => (
+            <a href={`/guia/${post.slug}`} class="block group">
+              <div class="bg-white rounded-xl shadow-md overflow-hidden group-hover:shadow-2xl transition-all flex flex-col h-full">
+                <img src={post.data.heroImage} class="w-full h-40 object-cover" alt={post.data.title} />
+                <div class="p-5 flex-grow">
+                  <span class="text-[10px] font-bold uppercase text-blue-600">{post.data.type}</span>
+                  <h4 class="font-bold text-base mt-1 leading-snug text-gray-800 group-hover:text-blue-700 transition line-clamp-2">
+                    {post.data.title}
+                  </h4>
+                </div>
+              </div>
+            </a>
+          ))}
         </div>
-    </div>
-
-    <div class="border-t pt-12">
-        <h3 class="text-2xl font-black mb-8 italic uppercase tracking-tighter">Você também pode gostar</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {guides.map(post => (
-                <a href={`/guia/${post.slug}`} class="block group">
-                    <img src={post.data.heroImage} class="w-full h-32 object-cover rounded-lg mb-2" />
-                    <h4 class="font-bold text-sm leading-tight group-hover:text-blue-600 transition">{post.data.title}</h4>
-                </a>
-            ))}
-        </div>
-    </div>
+      </div>
+    )}
   </article>
 </Layout>
