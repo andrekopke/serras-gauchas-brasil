@@ -9,64 +9,38 @@ export async function getStaticPaths() {
     props: { guide },
   }));
 }
-
 const { guide } = Astro.props;
 const { Content } = await guide.render();
-
-const allGuides = await getCollection('guides');
-const relatedPosts = allGuides
-  .filter(p => p.slug !== guide.slug)
-  .slice(0, 3);
 ---
 
 <Layout title={guide.data.title}>
-  <article class="max-w-3xl mx-auto px-4 py-12 md:py-16">
+  <article class="max-w-2xl mx-auto px-4 py-10 md:py-20">
     
-    <div class="mb-8">
-        <span class="bg-blue-600 text-white px-5 py-2 rounded-full text-[11px] font-black uppercase tracking-widest leading-none">
-            {guide.data.type} em <span class="capitalize">{guide.data.destination}</span>
+    <div class="mb-6 flex justify-center md:justify-start">
+        <span class="bg-blue-600 text-white px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest">
+            {guide.data.type}
         </span>
     </div>
     
-    <h1 class="text-4xl md:text-6xl font-black mb-10 leading-[1.1] text-gray-900 font-serif tracking-tight">
+    <h1 class="text-2xl md:text-4xl font-black mb-10 leading-tight text-gray-900 font-sans tracking-tight text-center md:text-left">
       {guide.data.title}
     </h1>
     
-    <div class="mb-16">
-        <img src={guide.data.heroImage} class="w-full h-auto max-h-[500px] object-cover rounded-3xl shadow-2xl" alt={guide.data.title} />
+    <div class="mb-20">
+        <img src={guide.data.heroImage} class="w-full h-auto rounded-2xl shadow-md border border-gray-100" alt={guide.data.title} />
     </div>
 
-    <div class="prose prose-xl prose-blue max-w-none 
-                text-gray-800 leading-relaxed 
-                prose-p:mb-10 prose-p:leading-8
-                prose-headings:font-black prose-headings:text-gray-900
-                prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8
-                prose-h3:text-2xl prose-h3:mt-12 prose-h3:mb-6
-                prose-img:rounded-3xl prose-img:shadow-lg prose-img:my-12
-                prose-strong:text-blue-900 prose-ul:mb-8 prose-li:mb-2">
+    <div class="prose prose-lg md:prose-xl prose-blue max-w-none 
+                text-gray-800 
+                prose-p:leading-8 prose-p:mb-10
+                prose-headings:text-gray-900 prose-headings:font-bold
+                prose-h2:text-2xl md:text-3xl prose-h2:mt-24 prose-h2:mb-10 prose-h2:border-b prose-h2:pb-4
+                prose-h3:text-xl md:text-2xl prose-h3:mt-16 prose-h3:mb-6
+                prose-li:mb-5 prose-ul:mb-12
+                prose-blockquote:bg-yellow-50 prose-blockquote:border-yellow-400 prose-blockquote:p-8 prose-blockquote:rounded-2xl prose-blockquote:not-italic prose-blockquote:my-16
+                prose-img:my-16 prose-img:rounded-2xl">
       <Content />
     </div>
 
-    {relatedPosts.length > 0 && (
-      <div class="mt-28 pt-16 border-t border-gray-200">
-        <h3 class="text-3xl font-black mb-12 text-gray-900 uppercase italic tracking-tighter">Leia Também</h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {relatedPosts.map(post => (
-            <a href={`/guia/${post.slug}`} class="block group">
-              <div class="bg-white rounded-3xl shadow-lg overflow-hidden group-hover:shadow-2xl transition-all flex flex-col h-full border border-gray-100">
-                <img src={post.data.heroImage} class="w-full h-44 object-cover" alt={post.data.title} />
-                <div class="p-6 flex-grow">
-                  <span class="text-[10px] font-bold uppercase text-blue-600 tracking-wider">{post.data.type}</span>
-                  <h4 class="font-bold text-lg mt-1 leading-snug text-gray-800 group-hover:text-blue-700 transition">
-                    {post.data.title}
-                  </h4>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    )}
   </article>
 </Layout>
