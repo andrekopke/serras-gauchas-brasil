@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Início">
+	<section class="relative h-[500px] flex items-center justify-center text-white">
+		<div class="absolute inset-0 bg-black/40 z-10"></div>
+		<img 
+			src="/mini-mundo-gramado.jpg" 
+			class="absolute inset-0 w-full h-full object-cover" 
+			alt="Gramado RS"
+		/>
+		<div class="relative z-20 text-center px-4">
+			<h1 class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
+				Descubra a Magia das Serras Gaúchas
+			</h1>
+			<p class="text-xl md:text-2xl mb-8 drop-shadow-md">
+				Guia completo de Gramado, Canela e muito mais.
+			</p>
+			<a href="#destinos" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-8 rounded-full transition-all text-lg shadow-lg">
+				Explorar Destinos
+			</a>
+		</div>
+	</section>
+
+	<section id="destinos" class="container mx-auto px-4 py-16">
+		<h2 class="text-3xl font-bold mb-8 text-blue-800 border-l-4 border-yellow-500 pl-4">
+			Cidades Imperdíveis
+		</h2>
+		
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			<div class="bg-white rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform cursor-pointer">
+				<img src="/mini-mundo-gramado.jpg" class="w-full h-48 object-cover" alt="Gramado" />
+				<div class="p-6">
+					<h3 class="text-2xl font-bold mb-2">Gramado</h3>
+					<p class="text-gray-600 mb-4">A cidade mais charmosa do Brasil, famosa pelo Natal Luz e gastronomia única.</p>
+					<span class="text-blue-600 font-semibold">Ver guia completo →</span>
+				</div>
+			</div>
+
+			<div class="bg-white rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition-transform cursor-pointer">
+				<div class="w-full h-48 bg-gray-300 flex items-center justify-center text-gray-500 italic">
+					Foto de Canela em breve
+				</div>
+				<div class="p-6">
+					<h3 class="text-2xl font-bold mb-2">Canela</h3>
+					<p class="text-gray-600 mb-4">Natureza exuberante, parques temáticos e a imponente Catedral de Pedra.</p>
+					<span class="text-blue-600 font-semibold">Ver guia completo →</span>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
