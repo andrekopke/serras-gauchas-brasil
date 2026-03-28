@@ -22,6 +22,7 @@ const guidesCollection = defineCollection({
     heroImage: z.string(),
     rating: z.number().min(0).max(5),
     priceRange: z.number().min(1).max(4),
+    order: z.number().default(99),
     affiliateLink: z.string().optional(),
   }),
 });
