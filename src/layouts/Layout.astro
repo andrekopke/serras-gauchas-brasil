@@ -1,43 +1,47 @@
 ---
-interface Props {
-	title: string;
-}
-
+interface Props { title: string; }
 const { title } = Astro.props;
 ---
-
 <!doctype html>
 <html lang="pt-br">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Guia completo de viagem para Gramado, Canela e Serras Gaúchas" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<title>{title} | Guia Gramado e Canela</title>
+		<meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><title>{title}</title>
 	</head>
 	<body class="bg-gray-50 font-sans text-gray-900">
 		<header class="bg-blue-700 text-white shadow-md">
-			<nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-				<a href="/" class="text-2xl font-bold tracking-tight">Guia <span class="text-yellow-400">Serras</span></a>
-				<div class="space-x-6 hidden md:block">
-					<a href="#" class="hover:text-yellow-400">Destinos</a>
-					<a href="#" class="hover:text-yellow-400">Atrações</a>
-					<a href="#" class="hover:text-yellow-400">Hospedagem</a>
+			<nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+				<a href="/" class="text-xl font-black italic">GUIA <span class="text-yellow-400">SERRAS</span></a>
+				<div class="hidden md:flex space-x-6 text-sm font-bold uppercase">
+					<a href="/guia/passagens" class="hover:text-yellow-300">✈️ Passagens</a>
+					<a href="/guia/hoteis" class="hover:text-yellow-300">🏨 Hotéis</a>
+					<a href="/guia/cupons" class="text-yellow-400 font-black underline">🎟️ CUPONS</a>
 				</div>
 			</nav>
+            <div class="bg-white border-b overflow-x-auto">
+                <div class="container mx-auto flex justify-around p-4 min-w-[600px]">
+                    <a href="/guia/o-que-fazer" class="flex flex-col items-center group">
+                        <span class="text-2xl group-hover:scale-110 transition">🎡</span>
+                        <span class="text-[10px] font-bold text-gray-600 mt-1 uppercase">Atrações</span>
+                    </a>
+                    <a href="/guia/onde-ficar" class="flex flex-col items-center group">
+                        <span class="text-2xl group-hover:scale-110 transition">🛌</span>
+                        <span class="text-[10px] font-bold text-gray-600 mt-1 uppercase">Onde Ficar</span>
+                    </a>
+                    <a href="/guia/onde-comer" class="flex flex-col items-center group">
+                        <span class="text-2xl group-hover:scale-110 transition">🍽️</span>
+                        <span class="text-[10px] font-bold text-gray-600 mt-1 uppercase">Onde Comer</span>
+                    </a>
+                    <a href="/guia/como-chegar" class="flex flex-col items-center group">
+                        <span class="text-2xl group-hover:scale-110 transition">🚗</span>
+                        <span class="text-[10px] font-bold text-gray-600 mt-1 uppercase">Como Chegar</span>
+                    </a>
+                    <a href="/guia/descontos" class="flex flex-col items-center group">
+                        <span class="text-2xl group-hover:scale-110 transition">🏷️</span>
+                        <span class="text-[10px] font-bold text-yellow-600 mt-1 uppercase">Descontos</span>
+                    </a>
+                </div>
+            </div>
 		</header>
-
-		<main>
-			<slot />
-		</main>
-
-		<footer class="bg-gray-800 text-white mt-12 py-10">
-			<div class="container mx-auto px-4 text-center">
-				<p class="mb-4">© 2026 Guia Gramado e Canela - O seu portal das Serras Gaúchas</p>
-				<div class="text-gray-400 text-sm">
-					Feito para viajantes, por viajantes.
-				</div>
-			</div>
-		</footer>
+		<main><slot /></main>
 	</body>
 </html>
