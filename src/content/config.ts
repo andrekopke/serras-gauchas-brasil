@@ -24,6 +24,25 @@ const guidesCollection = defineCollection({
   }),
 });
 
+const couponsCollection = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    businessName: z.string(),
+    image: z.string(),
+    discountValue: z.string(), // Ex: "10% OFF" ou "R$ 50"
+    affiliateLink: z.string(),
+    category: z.enum(['atração', 'gastronomia', 'hospedagem']),
+  }),
+});
+
+// Atualize o export para incluir o 'coupons'
+export const collections = {
+  'destinations': destinationsCollection,
+  'guides': guidesCollection,
+  'coupons': couponsCollection,
+};
+
 export const collections = {
   'destinations': destinationsCollection,
   'guides': guidesCollection,
