@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 
+// 1. Coleção de Destinos (Cidades)
 const destinationsCollection = defineCollection({
   type: 'data',
   schema: z.object({
@@ -11,12 +12,13 @@ const destinationsCollection = defineCollection({
   }),
 });
 
+// 2. Coleção de Guias (Posts/Matérias)
 const guidesCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    destination: z.string(), // ID da cidade (ex: gramado)
-    type: z.enum(['atração', 'gastronomia', 'hospedagem', 'dica']),
+    destination: z.string(),
+    type: z.string(),
     heroImage: z.string(),
     rating: z.number().min(0).max(5),
     priceRange: z.number().min(1).max(4),
@@ -24,26 +26,22 @@ const guidesCollection = defineCollection({
   }),
 });
 
+// 3. Coleção de Cupons (Onde o dinheiro entra!)
 const couponsCollection = defineCollection({
   type: 'data',
   schema: z.object({
     title: z.string(),
     businessName: z.string(),
     image: z.string(),
-    discountValue: z.string(), // Ex: "10% OFF" ou "R$ 50"
+    discountValue: z.string(),
     affiliateLink: z.string(),
     category: z.enum(['atração', 'gastronomia', 'hospedagem']),
   }),
 });
 
-// Atualize o export para incluir o 'coupons'
+// O ÚNICO EXPORT (Unindo tudo)
 export const collections = {
   'destinations': destinationsCollection,
   'guides': guidesCollection,
   'coupons': couponsCollection,
-};
-
-export const collections = {
-  'destinations': destinationsCollection,
-  'guides': guidesCollection,
 };
