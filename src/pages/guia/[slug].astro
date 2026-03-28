@@ -14,7 +14,7 @@ const { Content } = await guide.render();
 ---
 
 <Layout title={guide.data.title}>
-  <article class="max-w-[750px] mx-auto px-6 py-12 md:py-20 font-sans antialiased text-[#333]">
+  <article class="max-w-[720px] mx-auto px-6 py-12 md:py-20 font-sans antialiased text-[#333]">
     
     <div class="mb-4">
         <span class="bg-[#0055ff] text-white px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-widest leading-none">
@@ -38,8 +38,6 @@ const { Content } = await guide.render();
 </Layout>
 
 <style is:global>
-  /* CONFIGURAÇÃO DE ESPAÇAMENTO EQUILIBRADO */
-  
   .content-body p {
     margin-bottom: 28px !important; 
     line-height: 1.8 !important;
@@ -47,9 +45,8 @@ const { Content } = await guide.render();
     color: #444 !important;
   }
 
-  /* Espaçamento entre atrações na lista */
   .content-body li {
-    margin-bottom: 16px !important;
+    margin-bottom: 14px !important;
     line-height: 1.7 !important;
     font-size: 18px !important;
   }
@@ -63,7 +60,7 @@ const { Content } = await guide.render();
   }
 
   .content-body h3 {
-    margin-top: 42px !important;
+    margin-top: 40px !important;
     margin-bottom: 18px !important;
     font-size: 21px !important;
     font-weight: 700 !important;
@@ -76,7 +73,7 @@ const { Content } = await guide.render();
   }
 
   .content-body hr {
-    margin: 50px 0 !important;
+    margin: 48px 0 !important;
     border: 0;
     border-top: 1px solid #eee !important;
   }
