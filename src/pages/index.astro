@@ -1,5 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+const allGuides = await getCollection('guides');
+
+// ORDENAR: O número menor (1) aparece primeiro
+const guides = allGuides.sort((a, b) => a.data.order - b.data.order);
 ---
 
 <Layout title="Início">
