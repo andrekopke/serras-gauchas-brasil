@@ -14,31 +14,31 @@ const { Content } = await guide.render();
 ---
 
 <Layout title={guide.data.title}>
-  <article class="max-w-2xl mx-auto px-6 py-20 md:py-32 font-sans text-gray-700 antialiased">
+  <article class="max-w-[700px] mx-auto px-6 py-12 md:py-20 font-sans antialiased text-[#333]">
     
-    <div class="mb-8">
-        <span class="bg-blue-600 text-white px-3 py-1 rounded-sm text-[10px] font-bold uppercase tracking-[0.15em] leading-none inline-block">
+    <div class="mb-4">
+        <span class="bg-[#0055ff] text-white px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-wider">
             {guide.data.type}
         </span>
     </div>
     
-    <h1 class="text-3xl md:text-4xl font-extrabold mb-12 leading-tight text-gray-900 tracking-tight">
+    <h1 class="text-[28px] md:text-[36px] font-bold mb-8 leading-[1.2] text-black tracking-tight">
       {guide.data.title}
     </h1>
     
-    <div class="mb-24">
+    <div class="mb-12">
         <img src={guide.data.heroImage} class="w-full h-auto shadow-sm" alt={guide.data.title} />
     </div>
 
-    <div class="prose prose-lg max-w-none 
-                prose-slate
-                prose-p:leading-9 prose-p:mb-16 prose-p:text-gray-600
-                prose-headings:text-gray-900 prose-headings:font-bold
-                prose-h2:text-2xl md:text-3xl prose-h2:mt-32 prose-h2:mb-12 prose-h2:tracking-tight
-                prose-h3:text-xl md:text-2xl prose-h3:mt-16 prose-h3:mb-8
-                prose-li:mb-6 prose-ul:mb-16
-                prose-hr:border-t prose-hr:border-gray-200 prose-hr:my-24
-                prose-blockquote:bg-[#f0f7ff] prose-blockquote:border-l-4 prose-blockquote:border-blue-600 prose-blockquote:p-10 prose-blockquote:rounded-r-md prose-blockquote:not-italic prose-blockquote:my-20 prose-blockquote:text-blue-900 prose-blockquote:shadow-sm">
+    <div class="prose prose-neutral max-w-none 
+                prose-p:text-[18px] prose-p:leading-[1.8] prose-p:mb-10 prose-p:text-[#444]
+                prose-headings:text-black prose-headings:font-bold
+                prose-h2:text-[24px] prose-h2:mt-20 prose-h2:mb-6 prose-h2:border-b prose-h2:pb-2
+                prose-h3:text-[20px] prose-h3:mt-12 prose-h3:mb-4
+                prose-a:text-[#0055ff] prose-a:no-underline hover:prose-a:underline prose-a:font-bold
+                prose-li:mb-4 prose-li:text-[18px]
+                prose-hr:border-gray-200 prose-hr:my-16
+                prose-blockquote:bg-blue-50 prose-blockquote:border-l-4 prose-blockquote:border-[#0055ff] prose-blockquote:p-8 prose-blockquote:not-italic prose-blockquote:my-12 prose-blockquote:text-[#0033aa]">
       <Content />
     </div>
 
