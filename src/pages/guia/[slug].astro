@@ -14,7 +14,7 @@ const { Content } = await guide.render();
 ---
 
 <Layout title={guide.data.title}>
-  <article class="max-w-[720px] mx-auto px-6 py-12 md:py-20 font-sans antialiased text-[#333]">
+  <article class="max-w-[750px] mx-auto px-6 py-12 md:py-20 font-sans antialiased text-[#333]">
     
     <div class="mb-4">
         <span class="bg-[#0055ff] text-white px-2 py-0.5 rounded-sm text-[10px] font-bold uppercase tracking-widest leading-none">
@@ -26,7 +26,7 @@ const { Content } = await guide.render();
       {guide.data.title}
     </h1>
     
-    <div class="mb-16">
+    <div class="mb-14">
         <img src={guide.data.heroImage} class="w-full h-auto shadow-sm border border-gray-100" alt={guide.data.title} />
     </div>
 
@@ -38,27 +38,33 @@ const { Content } = await guide.render();
 </Layout>
 
 <style is:global>
-  /* AJUSTE FINO DE ESPAÇAMENTO - PADRÃO EXCELÊNCIA */
+  /* CONFIGURAÇÃO DE ESPAÇAMENTO EQUILIBRADO */
   
   .content-body p {
-    margin-bottom: 32px !important; /* Diminuído de 40px para 32px */
+    margin-bottom: 28px !important; 
     line-height: 1.8 !important;
     font-size: 18px !important;
     color: #444 !important;
   }
 
+  /* Espaçamento entre atrações na lista */
+  .content-body li {
+    margin-bottom: 16px !important;
+    line-height: 1.7 !important;
+    font-size: 18px !important;
+  }
+
   .content-body h2 {
-    margin-top: 60px !important; /* Diminuído de 80px para 60px */
+    margin-top: 56px !important; 
     margin-bottom: 24px !important;
     font-size: 26px !important;
     font-weight: 800 !important;
     color: #000 !important;
-    line-height: 1.3 !important;
   }
 
   .content-body h3 {
-    margin-top: 40px !important;
-    margin-bottom: 16px !important;
+    margin-top: 42px !important;
+    margin-bottom: 18px !important;
     font-size: 21px !important;
     font-weight: 700 !important;
   }
@@ -67,15 +73,10 @@ const { Content } = await guide.render();
     color: #0055ff !important;
     text-decoration: none !important;
     font-weight: 600 !important;
-    border-bottom: 1px solid transparent;
-    transition: border 0.2s;
-  }
-  .content-body a:hover {
-    border-bottom: 1px solid #0055ff;
   }
 
   .content-body hr {
-    margin: 60px 0 !important;
+    margin: 50px 0 !important;
     border: 0;
     border-top: 1px solid #eee !important;
   }
@@ -83,14 +84,9 @@ const { Content } = await guide.render();
   .content-body blockquote {
     background-color: #f0f7ff !important;
     border-left: 4px solid #0055ff !important;
-    padding: 32px !important;
-    margin: 48px 0 !important;
+    padding: 30px !important;
+    margin: 40px 0 !important;
     border-radius: 0 4px 4px 0;
     font-style: normal !important;
-  }
-
-  .content-body strong {
-    color: #222 !important;
-    font-weight: 700 !important;
   }
 </style>
