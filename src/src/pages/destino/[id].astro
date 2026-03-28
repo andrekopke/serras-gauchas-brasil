@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const destinations = await getCollection('destinations');
+  return destinations.map(dest => ({
+    params: { id: dest.id },
+  }));
+}
+
+const { id } = Astro.params;
+const destination = await getEntry('destinations', id);
+const allGuides = await getCollection('guides', ({ data }) => {
+  return data.destination === id;
+});
+---
+
+<Layout title={destination.data.name}>
+  <div class="bg-blue-900 text-white py-16">
+    <div class="container mx-auto px-4">
+      <h1 class="text-5xl font-bold mb-4">{destination.data.name}</h1>
+      <p class="text-xl opacity-90">{destination.data.description}</p>
+    </div>
+  </div>
+
+  <section class="container mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold mb-8 text-blue-900">O que fazer em {destination.data.name}</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {allGuides.map(guide => (
+        <a href={`/guia/${guide.slug}`} class="group">
+          <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all group-hover:shadow-xl">
+            <img src={guide.data.heroImage} alt={guide.data.title} class="w-full h-48 object-cover" />
+            <div class="p-6">
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-600">{guide.data.type}</span>
+              <h3 class="text-xl font-bold mt-2 group-hover:text-blue-700">{guide.data.title}</h3>
+              <div class="mt-4 flex items-center text-yellow-500">
+                {"★".repeat(guide.data.rating)}
+                <span class="ml-2 text-gray-400 text-sm">({guide.data.rating}/5)</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
